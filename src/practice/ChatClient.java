@@ -180,8 +180,10 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		if(ae.getSource() ==jbtnConnectServer) {//서버접속
 			try {
 				connectToSever();
+				//서버버튼이 눌리면 닉이 서버로 갈 수 있게 수정///////////////
 				nick=jtfNickName.getText();
 				dosWriteStream.writeUTF(nick);
+				//서버버튼이 눌리면 닉이 서버로 갈 수 있게 수정///////////////
 			} catch (UnknownHostException e) {
 				JOptionPane.showMessageDialog(this,"서버가 존재하지 않습니다.");
 				e.printStackTrace();

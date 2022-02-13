@@ -39,7 +39,9 @@ public class ChatHelper extends Thread {
 		disReadStream=new DataInputStream(someClient.getInputStream());
 		dosWriteStream=new DataOutputStream(someClient.getOutputStream());
 		
+		//서버에 접속 클라이언트의 nick이 뜨도록 가져오는 수정//////////////
 		nick = disReadStream.readUTF();
+		//서버에 접속 클라이언트의 nick이 뜨도록 가져오는 수정//////////////
 		//관리자 모니터에 접속자가 들어왔음을 보여준다.
 		dlmServerMonitor.addElement(nick+"님이 접속하였습니다.");
 		dlmServerMonitor.addElement(nick+"님 접속 정보 ["+someClient.getInetAddress()+"]");
