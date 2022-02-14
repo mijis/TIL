@@ -38,7 +38,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	
 	private Thread threadClient;
 	
-	private String nick;
+//	private String nick;
 	
 	public ChatClient() {
 		super("::::::::::::: 채팅 클라이언트 :::::::::::::::::::");
@@ -86,7 +86,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 				try {
 					if(disReadStream!=null) {disReadStream.close();}
 					if(dosWriteStream!=null) {dosWriteStream.close();}
-					if(someclient!=null) {someclient.close();}
+					if( someclient!=null) {someclient.close();}
 				}catch(IOException ie) {
 					System.exit(JFrame.ABORT);
 				}
@@ -96,6 +96,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		
 		setBounds(100, 100, 700, 500);
 		setVisible(true);
+		
 	}//ChatClient
 	
 	@Override
@@ -113,6 +114,8 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 			JOptionPane.showMessageDialog(this, "서버가 종료되었습니다.");
 			ie.printStackTrace();
 		}
+		
+		
 	}//run
 
 	private void talkCapture() throws IOException {
@@ -146,12 +149,16 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		String severIpAddress = jtfServerIp.getText().replaceAll(" ","");
 		someclient=new Socket(severIpAddress, 25000);
 		
-		
 		//스크림을 연결하여 데이터를 읽거나 보낼 수 있도록 만들고 
 		disReadStream = new DataInputStream(someclient.getInputStream());
 		dosWriteStream = new DataOutputStream(someclient.getOutputStream());
 		
-		//데이터를 읽어들일 수 있는 상태
+		//스트림이 연결되었으니 데이터를 보내고 읽을 수 있는 상태가 되었다.
+		//닉네임을 보낸다 (수시로 닉을 바꿀 수 있다.)
+		String nick=jtfNickName.getText();
+		dosWriteStream.writeUTF(nick);
+		
+		//데이터를 읽어들일 수 있는 상태 (Thread)
 		threadClient =new Thread(this);
 		threadClient.start(); //-> run()
 		
@@ -162,8 +169,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	
 	private void sendMsg() throws IOException{
 		String talk=jtfTalkInput.getText();
-		nick=jtfNickName.getText();
-		dosWriteStream.writeUTF("["+nick+"] "+talk);
+		dosWriteStream.writeUTF(talk);
 		jtfTalkInput.setText("");
 	}
 	
@@ -180,10 +186,10 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		if(ae.getSource() ==jbtnConnectServer) {//서버접속
 			try {
 				connectToSever();
-				//서버버튼이 눌리면 닉이 서버로 갈 수 있게 수정///////////////
-				nick=jtfNickName.getText();
-				dosWriteStream.writeUTF(nick);
-				//서버버튼이 눌리면 닉이 서버로 갈 수 있게 수정///////////////
+				/////////////////////////////////////숙제로 닉네임이 ChatServer에 나오도록 수정
+//				nick=jtfNickName.getText();
+//				dosWriteStream.writeUTF(nick);
+				/////////////////////////////////////숙제 수정 끝
 			} catch (UnknownHostException e) {
 				JOptionPane.showMessageDialog(this,"서버가 존재하지 않습니다.");
 				e.printStackTrace();
@@ -202,11 +208,8 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		}
 	}//actionPerformed
 
-
 	public static void main(String[] args) {
 		new ChatClient();
-		
-		
 	}//main
 
 }//class
