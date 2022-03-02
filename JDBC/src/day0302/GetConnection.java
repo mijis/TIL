@@ -6,25 +6,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * JDBC¸¦ »ç¿ëÇÑ Connection ¾ò±â
+ * JDBCë¥¼ ì‚¬ìš©í•œ Connection ì–»ê¸°
  * @author user
  *
  */
 public class GetConnection {
 
 	public GetConnection() throws SQLException {
-		//1. µå¶óÀÌ¹ö ·Îµù(e:/dev/driver/ojdbc8.jar)
+		//1. ë“œë¼ì´ë²„ ë¡œë”©(e:/dev/driver/ojdbc8.jar)
 		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			System.out.println("µå¶óÀÌ¹ö ·Îµù ¼º°ø");
+			System.out.println("ë“œë¼ì´ë²„ ë¡œë”© ì„±ê³µ");
 		} catch (ClassNotFoundException e) { //Compile exception (Checked Exception)
 			//Runtime Exception(Unchecked Exception)
 			e.printStackTrace();
 		}//end catch
 		
 		
-		//2. ·ÎµùµÈ µå¶óÀÌ¹ö¸¦ »ç¿ëÇÏ¿© Connection ¾ò±â
+		//2. ë¡œë”©ëœ ë“œë¼ì´ë²„ë¥¼ ì‚¬ìš©í•˜ì—¬ Connection ì–»ê¸°
 			String url="jdbc:oracle:thin:@localhost:1521:orcl"; //localhost, 127.0.0.1
 			String id= "scott";
 			String pass= "tiger";
@@ -33,19 +33,19 @@ public class GetConnection {
 			Statement stmt = null;
 			try {
 				con = DriverManager.getConnection(url, id, pass);
-				System.out.println("DB¿¬°á¼º°ø : "+con);
+				System.out.println("DBì—°ê²°ì„±ê³µ : "+con);
 				
-				//3. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+				//3. ì¿¼ë¦¬ë¬¸ ìƒì„±ê°ì²´ ì–»ê¸°
 				stmt=con.createStatement();
 				
-				//4. ¹¹¸®¹® ½ÇÇà ÈÄ °á°ú ¾ò±â
-				String dname="°³¹ßºÎ";
-				String insertQuery="insert into cp_dept(deptno, dname, loc) values(99,'"+dname+"','¼­¿ï')";
+				//4. ë­ë¦¬ë¬¸ ì‹¤í–‰ í›„ ê²°ê³¼ ì–»ê¸°
+				String dname="ê°œë°œë¶€";
+				String insertQuery="insert into cp_dept(deptno, dname, loc) values(99,'"+dname+"','ì„œìš¸')";
 				int cnt = stmt.executeUpdate(insertQuery);
-				System.out.println(insertQuery+"·Î " + cnt + "°Ç Ãß°¡µÇ¾ú½À´Ï´Ù.");
+				System.out.println(insertQuery+"ë¡œ " + cnt + "ê±´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.");
 				
 			}finally {
-				//5. ¿¬°á ²÷±â
+				//5. ì—°ê²° ëŠê¸°
 				if(stmt!=null) {stmt.close();}
 				if(con!=null) {con.close();}
 			}//end finally
