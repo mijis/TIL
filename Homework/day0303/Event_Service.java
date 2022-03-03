@@ -25,22 +25,22 @@ public class Event_Service extends WindowAdapter implements ActionListener{
 				InsertVO iVO = new InsertVO(name);
 				
 				d.insertName(iVO);
-				JOptionPane.showMessageDialog(null, name+ "À» Ãß°¡Çß½À´Ï´Ù.");
+				JOptionPane.showMessageDialog(null, name+ "ì„ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.");
 			
 			}catch (SQLException se){
-				JOptionPane.showMessageDialog(null, "ÀÌ¸§Ãß°¡ÀÛ¾÷¿¡ ¹®Á¦°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+				JOptionPane.showMessageDialog(null, "ì´ë¦„ì¶”ê°€ì‘ì—…ì— ë¬¸ì œê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				se.printStackTrace();
 				
-				//´Ù¾çÇÑ ¿¹¿Ü»óÈ² Ã³¸®
+				//ë‹¤ì–‘í•œ ì˜ˆì™¸ìƒí™© ì²˜ë¦¬
 				int errCode=se.getErrorCode();
 				String sqlErrMsg="";
 				switch(errCode) {
 					case 1: //ORA-00001
-						sqlErrMsg= "°°Àº ÀÌ¸§ÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù."; break;
+						sqlErrMsg= "ê°™ì€ ì´ë¦„ì´ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤."; break;
 					case 925 : //ORA-00925
-						sqlErrMsg= "Äõ¸®¹®ÀÌ Àß¸øµÇ¾ú½À´Ï´Ù."; break;
+						sqlErrMsg= "ì¿¼ë¦¬ë¬¸ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤."; break;
 					case 12899 : //ORA-12899
-						sqlErrMsg= "ÀÌ¸§ÀºÀº ¿µ¾î 10ÀÚ ÇÑ±Û 3ÀÚ ÀÌ³»ÀÌ¾î¾ßÇÕ´Ï´Ù."; break;
+						sqlErrMsg= "ì´ë¦„ì€ì€ ì˜ì–´ 10ì í•œê¸€ 3ì ì´ë‚´ì´ì–´ì•¼í•©ë‹ˆë‹¤."; break;
 				}//end switch
 				JOptionPane.showMessageDialog(null, sqlErrMsg);
 			}

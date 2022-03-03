@@ -41,13 +41,13 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 //	private String nick;
 	
 	public ChatClient() {
-		super("::::::::::::: Ã¤ÆÃ Å¬¶óÀÌ¾ğÆ® :::::::::::::::::::");
+		super("::::::::::::: ì±„íŒ… í´ë¼ì´ì–¸íŠ¸ :::::::::::::::::::");
 		jtfServerIp=new JTextField("211.63.89.",8);
 		jtfNickName=new JTextField(10);
 		jtfTalkInput=new JTextField();
 		
-		jbtnConnectServer=new JButton("¼­¹öÁ¢¼Ó");
-		jbtnCapture=new JButton("´ëÈ­ÀúÀå");
+		jbtnConnectServer=new JButton("ì„œë²„ì ‘ì†");
+		jbtnCapture=new JButton("ëŒ€í™”ì €ì¥");
 		
 		jtaTalkDisplay=new JTextArea();
 		jspJtaTalkDisplay=new JScrollPane( jtaTalkDisplay );
@@ -55,16 +55,16 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		jtaTalkDisplay.setEditable(false);
 		
 		JPanel jpNorth=new JPanel();
-		jpNorth.add(new JLabel("¼­¹öÁÖ¼Ò"));
+		jpNorth.add(new JLabel("ì„œë²„ì£¼ì†Œ"));
 		jpNorth.add( jtfServerIp);
-		jpNorth.add(new JLabel("´ëÈ­¸í"));
+		jpNorth.add(new JLabel("ëŒ€í™”ëª…"));
 		jpNorth.add( jtfNickName);
 		jpNorth.add( jbtnConnectServer);
 		jpNorth.add( jbtnCapture);
 		
-		jpNorth.setBorder(new TitledBorder("Á¢¼ÓÁ¤º¸"));
-		jspJtaTalkDisplay.setBorder(new TitledBorder("´ëÈ­³»¿ë"));
-		jtfTalkInput.setBorder(new TitledBorder("´ëÈ­"));
+		jpNorth.setBorder(new TitledBorder("ì ‘ì†ì •ë³´"));
+		jspJtaTalkDisplay.setBorder(new TitledBorder("ëŒ€í™”ë‚´ìš©"));
+		jtfTalkInput.setBorder(new TitledBorder("ëŒ€í™”"));
 		
 		add("North", jpNorth );
 		add("Center", jspJtaTalkDisplay );
@@ -101,17 +101,17 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	
 	@Override
 	public void run() {
-		//¸Ş½ÃÁö¸¦ ¹«ÇÑ ·çÇÁ·Î ÀĞ¾î µéÀÎ´Ù.(connectToServer()¿¡¼­ start()·Î È£Ãâ)
+		//ë©”ì‹œì§€ë¥¼ ë¬´í•œ ë£¨í”„ë¡œ ì½ì–´ ë“¤ì¸ë‹¤.(connectToServer()ì—ì„œ start()ë¡œ í˜¸ì¶œ)
 		try {
 			while(true) {
 				jtaTalkDisplay.append(disReadStream.readUTF());
 				jtaTalkDisplay.append("\n");
-				//´ëÈ­ÀÇ ³»¿ë¿¡ µû¶ó ½ºÅ©·Ñ¹Ù¸¦ °¡Àå ¾Æ·¡·Î ³»¸°´Ù.
+				//ëŒ€í™”ì˜ ë‚´ìš©ì— ë”°ë¼ ìŠ¤í¬ë¡¤ë°”ë¥¼ ê°€ì¥ ì•„ë˜ë¡œ ë‚´ë¦°ë‹¤.
 				jspJtaTalkDisplay.getVerticalScrollBar().setValue(
 						jspJtaTalkDisplay.getVerticalScrollBar().getMaximum());
 			}
 		} catch (IOException ie) {
-			JOptionPane.showMessageDialog(this, "¼­¹ö°¡ Á¾·áµÇ¾ú½À´Ï´Ù.");
+			JOptionPane.showMessageDialog(this, "ì„œë²„ê°€ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 			ie.printStackTrace();
 		}
 		
@@ -128,11 +128,11 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		
 		BufferedWriter bw = null;
 		try {
-			//Ä¸Ã³ ÆÄÀÏÀ» ÀúÀåÇÏ±â À§ÇØ ½ºÆ®¸²À» ¿¬°á
+			//ìº¡ì²˜ íŒŒì¼ì„ ì €ì¥í•˜ê¸° ìœ„í•´ ìŠ¤íŠ¸ë¦¼ì„ ì—°ê²°
 			bw=new BufferedWriter(new FileWriter(file));
 			bw.write(jtaTalkDisplay.getText());
 			bw.flush();
-			JOptionPane.showMessageDialog(this, file.getName()+"·Î ´ëÈ­³»¿ëÀÌ ÀúÀåµÇ¾ú½À´Ï´Ù.");
+			JOptionPane.showMessageDialog(this, file.getName()+"ë¡œ ëŒ€í™”ë‚´ìš©ì´ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}finally {
 			if(bw!=null) {bw.close();}
 		}
@@ -141,29 +141,29 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	
 	private void connectToSever() throws UnknownHostException, IOException {
 		if(someclient!=null && someclient.isConnected()) {
-			JOptionPane.showMessageDialog(this, "¼­¹ö¿¡ Á¢¼ÓµÇ¾îÀÖ½À´Ï´Ù");
+			JOptionPane.showMessageDialog(this, "ì„œë²„ì— ì ‘ì†ë˜ì–´ìˆìŠµë‹ˆë‹¤");
 			return;
 		}
 		
-		//¼ÒÄÏÀ» »ı¼ºÇÏ¿© ¼­¹ö¿¡ Á¢¼ÓÇÏ°í
+		//ì†Œì¼“ì„ ìƒì„±í•˜ì—¬ ì„œë²„ì— ì ‘ì†í•˜ê³ 
 		String severIpAddress = jtfServerIp.getText().replaceAll(" ","");
 		someclient=new Socket(severIpAddress, 25000);
 		
-		//½ºÅ©¸²À» ¿¬°áÇÏ¿© µ¥ÀÌÅÍ¸¦ ÀĞ°Å³ª º¸³¾ ¼ö ÀÖµµ·Ï ¸¸µé°í 
+		//ìŠ¤í¬ë¦¼ì„ ì—°ê²°í•˜ì—¬ ë°ì´í„°ë¥¼ ì½ê±°ë‚˜ ë³´ë‚¼ ìˆ˜ ìˆë„ë¡ ë§Œë“¤ê³  
 		disReadStream = new DataInputStream(someclient.getInputStream());
 		dosWriteStream = new DataOutputStream(someclient.getOutputStream());
 		
-		//½ºÆ®¸²ÀÌ ¿¬°áµÇ¾úÀ¸´Ï µ¥ÀÌÅÍ¸¦ º¸³»°í ÀĞÀ» ¼ö ÀÖ´Â »óÅÂ°¡ µÇ¾ú´Ù.
-		//´Ğ³×ÀÓÀ» º¸³½´Ù (¼ö½Ã·Î ´ĞÀ» ¹Ù²Ü ¼ö ÀÖ´Ù.)
+		//ìŠ¤íŠ¸ë¦¼ì´ ì—°ê²°ë˜ì—ˆìœ¼ë‹ˆ ë°ì´í„°ë¥¼ ë³´ë‚´ê³  ì½ì„ ìˆ˜ ìˆëŠ” ìƒíƒœê°€ ë˜ì—ˆë‹¤.
+		//ë‹‰ë„¤ì„ì„ ë³´ë‚¸ë‹¤ (ìˆ˜ì‹œë¡œ ë‹‰ì„ ë°”ê¿€ ìˆ˜ ìˆë‹¤.)
 		String nick=jtfNickName.getText();
 		dosWriteStream.writeUTF(nick);
 		
-		//µ¥ÀÌÅÍ¸¦ ÀĞ¾îµéÀÏ ¼ö ÀÖ´Â »óÅÂ (Thread)
+		//ë°ì´í„°ë¥¼ ì½ì–´ë“¤ì¼ ìˆ˜ ìˆëŠ” ìƒíƒœ (Thread)
 		threadClient =new Thread(this);
 		threadClient.start(); //-> run()
 		
-		jtaTalkDisplay.setText("¼­¹ö¿¡ Á¢¼ÓÇÏ¿´½À´Ï´Ù.\nÁñ°Å¿î Ã¤ÆÃ\n");
-		//Ä¿¼­¸¦ ´ëÈ­ÀÔ·ÂÃ¢¿¡ ³Ö´Â´Ù.
+		jtaTalkDisplay.setText("ì„œë²„ì— ì ‘ì†í•˜ì˜€ìŠµë‹ˆë‹¤.\nì¦ê±°ìš´ ì±„íŒ…\n");
+		//ì»¤ì„œë¥¼ ëŒ€í™”ì…ë ¥ì°½ì— ë„£ëŠ”ë‹¤.
 		jtfTalkInput.requestFocus(); 
 	}
 	
@@ -174,7 +174,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent ae) { //´ëÈ­³»¿ë ÀúÀå
+	public void actionPerformed(ActionEvent ae) { //ëŒ€í™”ë‚´ìš© ì €ì¥
 		if(ae.getSource() ==jbtnCapture) {
 			try {
 				talkCapture();
@@ -183,26 +183,26 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 			}
 		}
 		
-		if(ae.getSource() ==jbtnConnectServer) {//¼­¹öÁ¢¼Ó
+		if(ae.getSource() ==jbtnConnectServer) {//ì„œë²„ì ‘ì†
 			try {
 				connectToSever();
-				/////////////////////////////////////¼÷Á¦·Î ´Ğ³×ÀÓÀÌ ChatServer¿¡ ³ª¿Àµµ·Ï ¼öÁ¤
+				/////////////////////////////////////ìˆ™ì œë¡œ ë‹‰ë„¤ì„ì´ ChatServerì— ë‚˜ì˜¤ë„ë¡ ìˆ˜ì •
 //				nick=jtfNickName.getText();
 //				dosWriteStream.writeUTF(nick);
-				/////////////////////////////////////¼÷Á¦ ¼öÁ¤ ³¡
+				/////////////////////////////////////ìˆ™ì œ ìˆ˜ì • ë
 			} catch (UnknownHostException e) {
-				JOptionPane.showMessageDialog(this,"¼­¹ö°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+				JOptionPane.showMessageDialog(this,"ì„œë²„ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		if(ae.getSource() ==jtfTalkInput) {//´ëÈ­ÀÔ·Â
+		if(ae.getSource() ==jtfTalkInput) {//ëŒ€í™”ì…ë ¥
 			try {
 				sendMsg();
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(this,"¼­¹ö°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+				JOptionPane.showMessageDialog(this,"ì„œë²„ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				e.printStackTrace();
 			}
 		}

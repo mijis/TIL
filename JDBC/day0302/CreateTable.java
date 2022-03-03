@@ -6,16 +6,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Statement.execute(); ¸¦ »ç¿ëÇÑ Äõ¸®¹®ÀÇ ½ÇÇà
+ * Statement.execute(); ë¥¼ ì‚¬ìš©í•œ ì¿¼ë¦¬ë¬¸ì˜ ì‹¤í–‰
  * @author user
  *
  */
 public class CreateTable {
 
 	public CreateTable() throws SQLException {
-		//1. µå¶óÀÌ¹ö ·Îµù
+		//1. ë“œë¼ì´ë²„ ë¡œë”©
 		try {
-			Class.forName("oracle.jdbc.OracleDriver"); //classpath or build path ÇÊ¿ä
+			Class.forName("oracle.jdbc.OracleDriver"); //classpath or build path í•„ìš”
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}//end catch 
@@ -23,27 +23,27 @@ public class CreateTable {
 		Connection con = null;
 		Statement stmt = null;
 		try {
-			//2. Ä¿³Ø¼Ç ¾ò±â
+			//2. ì»¤ë„¥ì…˜ ì–»ê¸°
 			String url="jdbc:oracle:thin:@localhost:1521:orcl";
 			String id="scott";
 			String pass="tiger";
 			
 			con = DriverManager.getConnection(url, id, pass);
 			
-			//3. Äõ¸®¹® »ı¼º °´Ã¼ ¾ò±â
+			//3. ì¿¼ë¦¬ë¬¸ ìƒì„± ê°ì²´ ì–»ê¸°
 			stmt=con.createStatement();
 			
-			//4. Äõ¸® ¼öÇà ÈÄ °á°ú ¾ò±â
+			//4. ì¿¼ë¦¬ ìˆ˜í–‰ í›„ ê²°ê³¼ ì–»ê¸°
 //			String createQuery = "create table test(num number, name varchar2(30), input_date date default sysdate)";
 			String createQuery="drop table test";
-			stmt.execute(createQuery);// Äõ¸® ½ÇÇà °á°ú¸¦ ¹ŞÀ» ¼ö ÀÖÀ¸¸é  true, ¹ŞÀ» ¼ö ¾øÀ¸¸é false°¡ ¸®ÅÏ
-			//Äõ¸®ÀÇ ½ÇÇàÀÌ Á¤»óÀûÀÌ¶ó¸é Á¶È¸µÈ °á°ú°¡ ¾ø¾î¼­ false°¡ ¸®ÅÏ, Äõ¸®ÀÇ ½ÇÇàÀÌ ½ÇÆĞÇÏ¸é ¿¹¿Ü°¡ ¸®ÅÏ
+			stmt.execute(createQuery);// ì¿¼ë¦¬ ì‹¤í–‰ ê²°ê³¼ë¥¼ ë°›ì„ ìˆ˜ ìˆìœ¼ë©´  true, ë°›ì„ ìˆ˜ ì—†ìœ¼ë©´ falseê°€ ë¦¬í„´
+			//ì¿¼ë¦¬ì˜ ì‹¤í–‰ì´ ì •ìƒì ì´ë¼ë©´ ì¡°íšŒëœ ê²°ê³¼ê°€ ì—†ì–´ì„œ falseê°€ ë¦¬í„´, ì¿¼ë¦¬ì˜ ì‹¤í–‰ì´ ì‹¤íŒ¨í•˜ë©´ ì˜ˆì™¸ê°€ ë¦¬í„´
 //			if(flag) {
-				System.out.println("Å×ÀÌºí »ı¼º ¼º°ø : "+stmt.getQueryTimeout());
+				System.out.println("í…Œì´ë¸” ìƒì„± ì„±ê³µ : "+stmt.getQueryTimeout());
 //			}
 			
 		}finally {
-			//5. ¿¬°á ²÷±â
+			//5. ì—°ê²° ëŠê¸°
 			if(stmt!=null) {stmt.close();}
 			if(con!=null) {con.close();}
 		}
@@ -57,7 +57,7 @@ public class CreateTable {
 		try {
 			new CreateTable();
 		} catch (SQLException se) {
-			System.err.println("Å×ÀÌºí »ı¼º ½ÇÆĞ");
+			System.err.println("í…Œì´ë¸” ìƒì„± ì‹¤íŒ¨");
 			se.printStackTrace();
 		}
 		

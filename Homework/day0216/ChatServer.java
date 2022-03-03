@@ -27,24 +27,24 @@ public class ChatServer extends JFrame implements ActionListener, Runnable {
 	private JList<String> jlServerMonitor;
 	private DefaultListModel<String> dlmServerMonitor;
 	
-	private Thread serverThread; // Á¢¼ÓÀÚ ¼ÒÄÏÀ» À©µµ¿ì µğÀÚÀÎ°ú µ¿½Ã¿¡ ¹Ş±â À§ÇÑ Thread
-	public static List<ChatHelper> connectList;//Á¢¼ÓÀÚ¸¦ ¹Ş±â À§ÇÑ ¸®½ºÆ®
-	private ServerSocket server;//Á¢¼ÓÀÚ°¡ ¼ÒÄÏÀ» ¹Ş±â À§ÇÑ ¼­¹ö¼ÒÄÏ
+	private Thread serverThread; // ì ‘ì†ì ì†Œì¼“ì„ ìœˆë„ìš° ë””ìì¸ê³¼ ë™ì‹œì— ë°›ê¸° ìœ„í•œ Thread
+	public static List<ChatHelper> connectList;//ì ‘ì†ìë¥¼ ë°›ê¸° ìœ„í•œ ë¦¬ìŠ¤íŠ¸
+	private ServerSocket server;//ì ‘ì†ìê°€ ì†Œì¼“ì„ ë°›ê¸° ìœ„í•œ ì„œë²„ì†Œì¼“
 		
 	public ChatServer() {
-		super(":::::::Ã¤ÆÃ¹æ °ü¸®ÀÚ::::::::::");
+		super(":::::::ì±„íŒ…ë°© ê´€ë¦¬ì::::::::::");
 		
 		 connectList=new ArrayList<ChatHelper>();
 		 
-		 jbtnOpenServer=new JButton("¼­¹ö°¡µ¿");
-		 jbtnClose=new JButton("¼­¹ö Á¾·á");
+		 jbtnOpenServer=new JButton("ì„œë²„ê°€ë™");
+		 jbtnClose=new JButton("ì„œë²„ ì¢…ë£Œ");
 			
 		dlmServerMonitor=new DefaultListModel<String>();
 		
 		jlServerMonitor=new JList<String>( dlmServerMonitor );
 		jspServerMonitor=new JScrollPane( jlServerMonitor);
 				
-		jspServerMonitor.setBorder(new TitledBorder("Á¢¼ÓÀÚ Á¤º¸"));
+		jspServerMonitor.setBorder(new TitledBorder("ì ‘ì†ì ì •ë³´"));
 		
 		JPanel jpSouth=new JPanel();
 		
@@ -86,19 +86,19 @@ public class ChatServer extends JFrame implements ActionListener, Runnable {
 	}//ChatServer
 	
 	/**
-	 * Á¢¼ÓÀÚ ¼ÒÄÏÀ» ¹Ş°í, ÇïÆÛ¿¡ ³Ö°í, Á¢¼ÓÀÚ°¡ º¸³»¿À´Â ¸Ş½ÃÁö¸¦ ÀĞÀ» ¼ö ÀÖ´Â »óÅÂ·Î ¸¸µé °Í. 
+	 * ì ‘ì†ì ì†Œì¼“ì„ ë°›ê³ , í—¬í¼ì— ë„£ê³ , ì ‘ì†ìê°€ ë³´ë‚´ì˜¤ëŠ” ë©”ì‹œì§€ë¥¼ ì½ì„ ìˆ˜ ìˆëŠ” ìƒíƒœë¡œ ë§Œë“¤ ê²ƒ. 
 	 */
 	@Override
 	public void run() {
 		try {
-			server=new ServerSocket(25000); //PORT ¿­±â
-			dlmServerMonitor.addElement("¼­¹ö°¡ °¡µ¿ ÁßÀÔ´Ï´Ù");
+			server=new ServerSocket(25000); //PORT ì—´ê¸°
+			dlmServerMonitor.addElement("ì„œë²„ê°€ ê°€ë™ ì¤‘ì…ë‹ˆë‹¤");
 			
 			ChatHelper helper = null;
-			for(int cnt=0; connectList.size()<20 ; cnt++) { //20¸í±îÁö ¹Ş´Â °Í
+			for(int cnt=0; connectList.size()<20 ; cnt++) { //20ëª…ê¹Œì§€ ë°›ëŠ” ê²ƒ
 				helper=new ChatHelper(server.accept(), dlmServerMonitor, cnt, jspServerMonitor);
 				connectList.add(helper);
-				//»ı¼ºµÈ helper¸¦ ´ëÈ­¸¦ ÀĞ¾îµé¿©, º¸³»ÁÙ ¼ö ÀÖ´Â »óÅÂ·Î ¸¸µç´Ù. => Thread¸¦ µ¹¸°´Ù.
+				//ìƒì„±ëœ helperë¥¼ ëŒ€í™”ë¥¼ ì½ì–´ë“¤ì—¬, ë³´ë‚´ì¤„ ìˆ˜ ìˆëŠ” ìƒíƒœë¡œ ë§Œë“ ë‹¤. => Threadë¥¼ ëŒë¦°ë‹¤.
 				helper.start();
 			} 
 			
@@ -118,11 +118,11 @@ public class ChatServer extends JFrame implements ActionListener, Runnable {
 		
 		if(ae.getSource() == jbtnOpenServer) {
 			if(serverThread!=null) {
-				JOptionPane.showMessageDialog(this, "¼­¹ö°¡ ÀÌ¹Ì °¡µ¿ ÁßÀÔ´Ï´Ù");
-				return; //¾Æ·¡ ÁÙÀÇ ÄÚµå¸¦ ½ÇÇàÇÏÁö ¾Ê°í È£ÃâÇÑ °÷À¸·Î µ¹¾Æ°¡ early return. (°¡µ¶¼ºÀÌ ÁÁ´Ù)
+				JOptionPane.showMessageDialog(this, "ì„œë²„ê°€ ì´ë¯¸ ê°€ë™ ì¤‘ì…ë‹ˆë‹¤");
+				return; //ì•„ë˜ ì¤„ì˜ ì½”ë“œë¥¼ ì‹¤í–‰í•˜ì§€ ì•Šê³  í˜¸ì¶œí•œ ê³³ìœ¼ë¡œ ëŒì•„ê°€ early return. (ê°€ë…ì„±ì´ ì¢‹ë‹¤)
 			}
 			
-			//else¸¦ ÀÛ¼ºÇÏÁö ¾Ê°í else ¿ªÇÒÀ» ÇÏ´Â ÄÚµå¸¦ ÀÛ¼ºÇÏ¸é µÈ´Ù
+			//elseë¥¼ ì‘ì„±í•˜ì§€ ì•Šê³  else ì—­í• ì„ í•˜ëŠ” ì½”ë“œë¥¼ ì‘ì„±í•˜ë©´ ëœë‹¤
 			serverThread=new Thread(this);
 			serverThread.start();
 		}

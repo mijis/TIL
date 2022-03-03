@@ -20,10 +20,10 @@ public class Design extends JFrame {
 	
 	
 	public Design() {
-		super("�̸� �߰�");
-		JLabel jlblbName = new JLabel("�̸�");
+		super("ÀÌ¸§ Ãß°¡");
+		JLabel jlblbName = new JLabel("ÀÌ¸§");
 		jtfName = new JTextField(10);
-		jbtnAdd = new JButton("�Է�");
+		jbtnAdd = new JButton("ÀÔ·Â");
 		JTextArea jtaNameDisp = new JTextArea();
 		
 		JPanel jpNorth = new JPanel();
