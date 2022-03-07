@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Singleton PatternÀ» µµÀÔÇÑ Å¬·¡½º!
- * Connection ¾ò±â, ²÷±â
+ * Singleton Patternì„ ë„ì…í•œ í´ë˜ìŠ¤!
+ * Connection ì–»ê¸°, ëŠê¸°
  * @author user
  *
  */
@@ -17,13 +17,13 @@ public class DbConnection {
 	
 	
 	/**
-	 * Å¬·¡½º ¿ÜºÎ¿¡¼­ °´Ã¼È­µÇ´Â °ÍÀ» ¸·´Â´Ù.
+	 * í´ë˜ìŠ¤ ì™¸ë¶€ì—ì„œ ê°ì²´í™”ë˜ëŠ” ê²ƒì„ ë§‰ëŠ”ë‹¤.
 	 */
 	private DbConnection() {
 	}//DbConnection
 	
 	/**
-	 * DbConnection °´Ã¼¸¦ ¹İÈ¯ÇÏ´Â ÀÏ
+	 * DbConnection ê°ì²´ë¥¼ ë°˜í™˜í•˜ëŠ” ì¼
 	 * @return
 	 */
 	public static DbConnection getInstance() {
@@ -37,14 +37,14 @@ public class DbConnection {
 	
 	public Connection getConn() throws SQLException {
 		Connection con = null;
-		//1. µå¶óÀÌ¹ö·Îµù
+		//1. ë“œë¼ì´ë²„ë¡œë”©
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		//2. Ä¿³Ø¼Ç ¾ò±â
+		//2. ì»¤ë„¥ì…˜ ì–»ê¸°
 		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String id = "scott";
 		String pass = "tiger";
@@ -65,7 +65,7 @@ public class DbConnection {
 	}
 
 	/**
-	 * DBMS ¿¬°á Á¾·á
+	 * DBMS ì—°ê²° ì¢…ë£Œ
 	 * @param rs
 	 * @param stmt
 	 * @param con
