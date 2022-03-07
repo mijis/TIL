@@ -27,11 +27,11 @@ public class SelectTable extends JFrame implements ItemListener {
 	private String tableName;
 	
 	public SelectTable() {
-		super("Å×ÀÌºí Á¶È¸");
+		super("í…Œì´ë¸” ì¡°íšŒ");
 		
 		SelectTableDAO stDAO = SelectTableDAO.getinstance();
 		
-		jlbl=new JLabel("Å×ÀÌºí");
+		jlbl=new JLabel("í…Œì´ë¸”");
 		
 		jcb = new JComboBox<String>();
 		
@@ -45,14 +45,14 @@ public class SelectTable extends JFrame implements ItemListener {
 		
 		
 		JPanel jpanel=new JPanel();
-		jpanel.setBorder(new TitledBorder("Å×ÀÌºí ¼±ÅÃ"));
+		jpanel.setBorder(new TitledBorder("í…Œì´ë¸” ì„ íƒ"));
 		
 		jpanel.add(jlbl);
 		jpanel.add(jcb);
 		
 		jta = new JTextArea();
 		jspJtaOutput = new JScrollPane(jta);
-		jspJtaOutput.setBorder(new TitledBorder("Á¶È¸°á°ú"));
+		jspJtaOutput.setBorder(new TitledBorder("ì¡°íšŒê²°ê³¼"));
 		
 		jcb.addItemListener(this);
 		
@@ -89,7 +89,7 @@ public class SelectTable extends JFrame implements ItemListener {
 			}//end for
 			
 			if(list.isEmpty()) {
-				jta.setText("Å×ÀÌºí¿¡ °ªÀÌ Á¸ÀçÇÏÁö¾Ê½À´Ï´Ù.");
+				jta.setText("í…Œì´ë¸”ì— ê°’ì´ ì¡´ì¬í•˜ì§€ì•ŠìŠµë‹ˆë‹¤.");
 			}
 			
 			jta.setText(output.toString());
