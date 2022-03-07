@@ -37,14 +37,14 @@ public class SelectTableDAO {
 		DbConnection dc = DbConnection.getInstance();
 		
 		try {
-			//1. µå¶óÀÌ¹ö ·Îµù
-			//2. Ä¿³Ø¼Ç ¾ò±â
+			//1. ë“œë¼ì´ë²„ ë¡œë”©
+			//2. ì»¤ë„¥ì…˜ ì–»ê¸°
 				con=dc.getConn();
-			//3. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+			//3. ì¿¼ë¦¬ë¬¸ ìƒì„±ê°ì²´ ì–»ê¸°
 				tableName = "select TABLE_NAME from tabs";
 				pstmt=con.prepareStatement(tableName);
 				
-			//4. Äõ¸®¹® ½ÇÇà ÈÄ °á°ú ¾ò±â
+			//4. ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ í›„ ê²°ê³¼ ì–»ê¸°
 				rs = pstmt.executeQuery();
 				list = new ArrayList<String>();
 				
@@ -56,7 +56,7 @@ public class SelectTableDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			//5. ¿¬°á ²÷±â
+			//5. ì—°ê²° ëŠê¸°
 				dc.close(rs, pstmt, con);
 		}
 		return list;
@@ -73,14 +73,14 @@ public class SelectTableDAO {
 		DbConnection dc = DbConnection.getInstance();
 		
 		try {
-			//1. µå¶óÀÌ¹ö ·Îµù
-			//2. Ä¿³Ø¼Ç ¾ò±â
+			//1. ë“œë¼ì´ë²„ ë¡œë”©
+			//2. ì»¤ë„¥ì…˜ ì–»ê¸°
 				con=dc.getConn();
-			//3. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+			//3. ì¿¼ë¦¬ë¬¸ ìƒì„±ê°ì²´ ì–»ê¸°
 				String table = "select column_name, data_type, data_length from user_tab_cols ";
 				pstmt=con.prepareStatement(table);
 				
-			//4. Äõ¸®¹® ½ÇÇà ÈÄ °á°ú ¾ò±â
+			//4. ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ í›„ ê²°ê³¼ ì–»ê¸°
 				rs = pstmt.executeQuery();
 				TableVO tVO = null;
 				
@@ -96,7 +96,7 @@ public class SelectTableDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			//5. ¿¬°á ²÷±â
+			//5. ì—°ê²° ëŠê¸°
 				dc.close(rs, pstmt, con);
 		}
 		
