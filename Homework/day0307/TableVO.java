@@ -1,13 +1,9 @@
 package day0307;
 
-/**
- * @author user
- *
- */
 public class TableVO {
 	
-	String column_name, data_type;
-	int data_length;
+	private String column_name, data_type; //0308 수정 private 설정하지 않음 (자바는 _를 좋아하지 않음)
+	private int data_length;
 	
 	public TableVO() {
 		super();

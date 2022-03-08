@@ -7,10 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author user
- *
- */
 public class SelectTableDAO {
 
 	private static SelectTableDAO stDAO;
@@ -26,7 +22,7 @@ public class SelectTableDAO {
 	}//getinstance
 	
 	
-	public List<String> comboList() throws SQLException  {
+	public List<String> selectAllTab() throws SQLException  { //0308¼öÁ¤ : methodÀÌ¸§Àº Á÷°üÀûÀÌ°Ô ÁÖÀÚ
 		String tableName=null;
 		List<String> list=null;
 		
@@ -37,33 +33,33 @@ public class SelectTableDAO {
 		DbConnection dc = DbConnection.getInstance();
 		
 		try {
-			//1. ë“œë¼ì´ë²„ ë¡œë”©
-			//2. ì»¤ë„¥ì…˜ ì–»ê¸°
+			//1. µå¶óÀÌ¹ö ·Îµù
+			//2. Ä¿³Ø¼Ç ¾ò±â
 				con=dc.getConn();
-			//3. ì¿¼ë¦¬ë¬¸ ìƒì„±ê°ì²´ ì–»ê¸°
-				tableName = "select TABLE_NAME from tabs";
+			//3. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+				tableName = "select tname from tab";
 				pstmt=con.prepareStatement(tableName);
 				
-			//4. ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ í›„ ê²°ê³¼ ì–»ê¸°
+			//4. Äõ¸®¹® ½ÇÇà ÈÄ °á°ú ¾ò±â
 				rs = pstmt.executeQuery();
 				list = new ArrayList<String>();
 				
 				while(rs.next()) {
-					list.add(rs.getString("TABLE_NAME"));
+					list.add(rs.getString("tname"));
 				}
 				
 				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			//5. ì—°ê²° ëŠê¸°
+			//5. ¿¬°á ²÷±â
 				dc.close(rs, pstmt, con);
 		}
 		return list;
-	}//comboList
+	}//selectAllTab
 	
 	
-	public List<TableVO> selectTable(String tableName) throws SQLException {
+	public List<TableVO> selectAllColumn(String tableName) throws SQLException {//0308 Á÷°üÀûÀÎ ÀÌ¸§ÁÖ±â
 		List<TableVO> list = null;
 		
 		Connection con=null;
@@ -73,14 +69,19 @@ public class SelectTableDAO {
 		DbConnection dc = DbConnection.getInstance();
 		
 		try {
-			//1. ë“œë¼ì´ë²„ ë¡œë”©
-			//2. ì»¤ë„¥ì…˜ ì–»ê¸°
+			//1. µå¶óÀÌ¹ö ·Îµù
+			//2. Ä¿³Ø¼Ç ¾ò±â
 				con=dc.getConn();
-			//3. ì¿¼ë¦¬ë¬¸ ìƒì„±ê°ì²´ ì–»ê¸°
-				String table = "select column_name, data_type, data_length from user_tab_cols ";
+			//3. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+				String table = "select column_name, data_type, data_length from user_tab_cols where table_name=?";
+				//0308 ¼öÁ¤ where table=?À» ÀØÀ½
 				pstmt=con.prepareStatement(table);
 				
-			//4. ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ í›„ ê²°ê³¼ ì–»ê¸°
+				//¹ÙÀÎµåº¯¼ö
+				pstmt.setString(1, tableName);
+				
+			//4. Äõ¸®¹® ½ÇÇà ÈÄ °á°ú ¾ò±â
+				
 				rs = pstmt.executeQuery();
 				TableVO tVO = null;
 				
@@ -96,7 +97,7 @@ public class SelectTableDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			//5. ì—°ê²° ëŠê¸°
+			//5. ¿¬°á ²÷±â
 				dc.close(rs, pstmt, con);
 		}
 		

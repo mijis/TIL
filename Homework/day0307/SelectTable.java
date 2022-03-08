@@ -13,10 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-/**
- * @author user
- *
- */
 @SuppressWarnings("serial")
 public class SelectTable extends JFrame implements ItemListener {
 
@@ -27,32 +23,30 @@ public class SelectTable extends JFrame implements ItemListener {
 	private String tableName;
 	
 	public SelectTable() {
-		super("ÌÖåÏù¥Î∏î Ï°∞Ìöå");
+		super("≈◊¿Ã∫Ì ¡∂»∏");
 		
-		SelectTableDAO stDAO = SelectTableDAO.getinstance();
+//		SelectTableDAO stDAO = SelectTableDAO.getinstance();
+//		try {
+//			for(int i=0; i<stDAO.selectAllTab().size(); i++) {
+//				jcb.addItem(stDAO.selectAllTab().get(i));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		
-		jlbl=new JLabel("ÌÖåÏù¥Î∏î");
-		
+		jlbl=new JLabel("≈◊¿Ã∫Ì");
 		jcb = new JComboBox<String>();
-		
-		try {
-			for(int i=0; i<stDAO.comboList().size(); i++) {
-				jcb.addItem(stDAO.comboList().get(i));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 		
 		JPanel jpanel=new JPanel();
-		jpanel.setBorder(new TitledBorder("ÌÖåÏù¥Î∏î ÏÑ†ÌÉù"));
+		jpanel.setBorder(new TitledBorder("≈◊¿Ã∫Ì º±≈√"));
 		
 		jpanel.add(jlbl);
 		jpanel.add(jcb);
 		
 		jta = new JTextArea();
 		jspJtaOutput = new JScrollPane(jta);
-		jspJtaOutput.setBorder(new TitledBorder("Ï°∞ÌöåÍ≤∞Í≥º"));
+		jspJtaOutput.setBorder(new TitledBorder("¡∂»∏∞·∞˙"));
 		
 		jcb.addItemListener(this);
 		
@@ -66,30 +60,50 @@ public class SelectTable extends JFrame implements ItemListener {
 		
 	}//SelectTable
 	
-	public void searchTable(String table) {
+	
+	//0308 «œ≥™¿« method∑Œ ∫–∏Æ«ÿº≠ ªÁøÎ«œ¿⁄
+	private void searchTableData() {
+		SelectTableDAO stDAO = SelectTableDAO.getinstance();
+		try {
+			
+			//0308 ºˆ¡§ ∞≥º±µ» for ªÁøÎ¿ª ¿ß«ÿ
+			List<String> tableList = stDAO.selectAllTab(); //≈◊¿Ã∫Ì¿ª ¡∂»∏«œø©
+			
+			for(String tname:tableList) {
+				//0308 ºˆ¡§ ∞≥º±µ» for ªÁøÎ¿ª ¿ß«ÿ
+//			for(int i=0; i<stDAO.selectAllTab().size(); i++) {
+				jcb.addItem(tname);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void searchTable(String tableName) {
 		
 		SelectTableDAO stDAO = SelectTableDAO.getinstance();
 		
 		try {
-			String tableName = jcb.getSelectedItem().toString();
-			List<TableVO> list = stDAO.selectTable(tableName);
+			tableName = jcb.getSelectedItem().toString();
+			List<TableVO> list = stDAO.selectAllColumn(tableName);
 			
 			StringBuilder output = new StringBuilder();
 			
 			output.append("NUMBER\tCOLUMN_NAME\tDATA_TYPE\tDATA_LENGTH\n");
 			
-			TableVO tDAO = null;
-			for(int i=0; i<list.size(); i++) {
-				tDAO = list.get(i);
-				output.append(i+1).append("\t")
-				.append(tDAO.getColumn_name()).append("\t").append("\t")
-				.append(tDAO.getData_type()).append("\t")
-				.append(tDAO.getData_length()).append("\n");
+			//∞≥º±µ» for∞° »Œæ¿ ∞£¥‹
+			for(TableVO tVO :list) {
+//			for(int i=0; i<list.size(); i++) {
+//				tVO = list.get(i);
+				output/*.append(i+1).append("\t")*/
+				.append(tVO.getColumn_name()).append("\t").append("\t")
+				.append(tVO.getData_type()).append("\t")
+				.append(tVO.getData_length()).append("\n");
 				
 			}//end for
 			
 			if(list.isEmpty()) {
-				jta.setText("ÌÖåÏù¥Î∏îÏóê Í∞íÏù¥ Ï°¥Ïû¨ÌïòÏßÄÏïäÏäµÎãàÎã§.");
+				jta.setText("≈◊¿Ã∫Ìø° ∞™¿Ã ¡∏¿Á«œ¡ˆæ Ω¿¥œ¥Ÿ.");
 			}
 			
 			jta.setText(output.toString());
@@ -112,7 +126,7 @@ public class SelectTable extends JFrame implements ItemListener {
 	
 	
 	public static void main(String[] args) {
-		new SelectTable();
+		new SelectTable().searchTableData();
 	}//main
 	
 }//Work0307
