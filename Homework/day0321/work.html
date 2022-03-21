@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+h1{text-align: center}
+div{height:60px}
+table{margin:0px auto; border-spacing: 0px}
+td{ height: 80px; margin: 0px}
+th{border-bottom: 2px solid #000000; width:400px; height: 50px; font-weight: bold; font-size: 20px; text-align: left;}
+input{color: #cdcdcd; width: 400px; height: 50px;border: 1px solid #cdcdcd; font-weight: bold; }
+
+a:hover{text-decoration: underline; color:#000000}
+
+#btn_login{color: #ffffff; background-color: #333; font-weight: bold; font-size: 20px; cursor: pointer;}
+#btn_orderSearch{color: #737373; background-color: #f9f9f9; font-weight: bold; font-size: 20px; cursor: pointer; border: 1px solid #cdcdcd; box-shadow: 0px 2px 3px #c0c0c0}
+</style>
+</head>
+<body>
+<div></div>
+<h1>로그인</h1>
+<div></div>
+<table>
+<tr>
+	<th colspan="3"><label>회원로그인</label></th>
+	<th style="width: 80px; border-bottom: none"></th>
+	<th><label>비회원 주문조회</label></th>
+</tr>
+<tr>
+	<td colspan="3"><input type="text" value="	아이디"/></td>
+	<td></td>
+	<td><input type="text" value="	주문자명"/></td>
+</tr>
+<tr>
+	<td colspan="3"><input type="text" value="	비밀번호"/></td>
+	<td></td>
+	<td><input type="text" value="	하이픈(-) 포함"/></td>
+</tr>
+<tr>
+	<td colspan="3"><input type="button" id="btn_login" value="로그인"/></td>
+	<td></td>
+	<td><input type="text" value="	비회원주문 비밀번호"/></td>
+</tr>
+<tr>
+	<td colspan="3"></td>
+	<td></td>
+	<td><input type="button" id="btn_orderSearch" value="비회원 주문 조회하기"/></td>
+</tr>
+<tr>
+	<td style="width:40px; height:5px; text-align: center"><a href="http://211.63.89.149/html_prj/css0321/member_form.html">회원가입</a></td>
+	<td style="width:40px; height:5px; text-align: center; border-left: 1px solid #cdcdcd; border-right:  1px solid #cdcdcd; ">아이디찾기</td>
+	<td style="width:40px; height:5px; text-align: center">비밀번호찾기</td>
+	<td style="height:5px;"></td>
+	<td style="height:5px;"></td>
+</tr>
+</table>
+</body>
+</html>
