@@ -6,23 +6,141 @@
 <!-- 공통 CSS -->
 <link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
 <style type="text/css">
+div{border: 3px solid #333; width: 400px; height: 300px; overflow: auto; margin-top: 20px}
+label{width: 100px; }
+input{ margin-top: 10px;}
+.btn{margin-left: 100px}
 </style>
 <script type="text/javascript">
-var year=prompt("태어난 해를 입력하세요.","1999");
-console.log("태어난 해 : "+year+"년");
 
-var gender=prompt("성별을 입력하세요", "남자 or 여자");
-if(gender=="남자") {
-	document.write("<div style='background-color:#0000FF; width: 30px; height: 30px; border-radius:15px'></div><br/>")
-}else if(gender=="여자"){
-	document.write("<div style='background-color:#FF0000; width: 30px; height: 30px; border-radius:15px'></div><br/>")
+function print() {
+	obj=document.frm;
+	name=obj.name.value;
+	birth=obj.birth.value;
+	securityNum=obj.securityNum.value;
+	 
+	var print="";	
+	val="";
+	print+=validation()+"<br/><br/>"; 
+
+	if(val=="유효") {
+		print+=result();
+	}
+	
+	var divNode= document.getElementById("output");
+	divNode.innerHTML=print;
 }
 
-var bgcolor=prompt("RGB를 입력하세요", "#000000");
-document.write("<div style='width: 100px; height: 100px; background-color: "+bgcolor+"'></div><br/>")
+function validation() {	
+	if(name == ""){
+		alert("이름 필수입력");
+		obj.name.focus();
+		return;
+	}
+	
+	if(birth == "" || securityNum == ""){
+		alert("주민번호 필수입력");
+		obj.birth.focus();
+		return;
+	}
+	
+	if((birth.length+securityNum.length)!=13){
+		alert("주민번호가 13자리가 이닙니다.");
+		obj.birth.focus();
+		return;
+	}
+	
+	var total=0;
+	for(var i=0; i<birth.length; i++) {
+		var n1 = birth.charAt(i)*(i+2);
+		total+=n1;
+	} 
+	
+	for(var i=0; i<securityNum.length-1; i++) {
+		n1=0;
+		i<2? n1=securityNum.charAt(i)*(i+8):n1 = securityNum.charAt(i)*i;
+		total += n1;
+	}
+	
+	securityNum.charAt(6)==11-(total%11)%10? val="유효":val="무효";
+	
+	var output = name+"님 <br/>주민번호 " + birth +" - " + securityNum+"<br/><br/>주민번호 유효성 검증 결과 : "+val;
+	return  output;
+}
+
+
+function result(){
+	
+ 	var yearFlag=securityNum.charAt(0);
+ 	var fullYear="";
+ 	var gender="";
+ 	var nation="";
+ 	switch(parseInt(yearFlag)){
+	 	case 1: fullYear = 19+birth.substring(0,2);
+ 				  gender = "남자";
+ 				  nation ="내국인";break;
+	 	case 2: fullYear = 19+birth.substring(0,2);
+ 				  gender = "여자";
+ 				  nation ="내국인";break;
+	 	case 3: fullYear = 20+birth.substring(0,2);
+ 				  gender = "남자";
+ 				  nation ="내국인";break;
+	 	case 4: fullYear = 20+birth.substring(0,2);
+ 				  gender = "여자";
+ 				  nation ="내국인";break;
+	 	case 5: fullYear = 19+birth.substring(0,2);
+ 				  gender = "남자";
+ 				  nation ="외국인";break;
+	 	case 6: fullYear = 19+birth.substring(0,2);
+ 				  gender = "여자";
+ 				  nation ="외국인";break;
+	 	case 7: fullYear = 20+birth.substring(0,2);
+ 				  gender = "남자";
+ 				  nation ="외국인";break;
+	 	case 8: fullYear = 20+birth.substring(0,2);
+ 				  gender = "여자";
+ 				  nation ="외국인";break;
+	 	case 9: fullYear = 18+birth.substring(0,2);
+ 				  gender = "남자";
+ 				  nation ="외국인";break;
+	 	case 0: fullYear = 18+birth.substring(0,2);
+ 				  gender = "여자";
+ 				  nation ="외국인"; break; 
+ 	}
+ 	
+ 	var ddi="";
+ 	switch(parseInt(fullYear)%12) {
+        case 0 : ddi ="원숭이띠"; break;
+        case 1 : ddi ="닭띠"; break;
+        case 2 : ddi ="개띠"; break;
+        case 3 : ddi ="돼지띠"; break;
+        case 4 : ddi ="쥐띠"; break;
+        case 5 : ddi ="소띠"; break;
+        case 6 : ddi ="호랑이띠"; break;
+        case 7 : ddi ="토끼띠"; break;
+        case 8 : ddi ="용띠"; break;
+        case 9 : ddi ="뱀띠"; break;
+        case 10 : ddi ="말띠"; break;
+        default : ddi ="양띠";
+        }
+
+
+	var date=birth.substring(2,4)+"월"+birth.substring(4,6)+"일";
+	
+	result = "태어난 해 : "+fullYear+"<br/>생년월일 : "+date+"<br/>성별 : "+gender+"<br/>띠 : "+ddi+"<br/>국적 : "+nation;
+	return result;
+}
 
 </script>
 </head>
-<body>
+<body >
+<form name="frm">
+<label>이름</label><input type="text" name="name" class="inputBox"/><br/>
+<label>주민번호</label>
+<input type="text" name="birth" class="inputBox" /> 
+	- <input type="password" name="securityNum" class="inputBox"/><br/>
+<input type="button" name="btn" value="입력" class="btn" onclick="print()" />
+</form>
+<div id="output"></div>
 </body>
 </html>
