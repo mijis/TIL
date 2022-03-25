@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+var year=prompt("태어난 해를 입력하세요.","1999");
+console.log("태어난 해 : "+year+"년");
+
+var gender=prompt("성별을 입력하세요", "남자 or 여자");
+if(gender=="남자") {
+	document.write("<div style='background-color:#0000FF; width: 30px; height: 30px; border-radius:15px'></div><br/>")
+}else if(gender=="여자"){
+	document.write("<div style='background-color:#FF0000; width: 30px; height: 30px; border-radius:15px'></div><br/>")
+}
+
+var bgcolor=prompt("RGB를 입력하세요", "#000000");
+document.write("<div style='width: 100px; height: 100px; background-color: "+bgcolor+"'></div><br/>")
+
+</script>
+</head>
+<body>
+</body>
+</html>
