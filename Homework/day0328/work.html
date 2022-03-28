@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#div {width:400px; height: 200px; border: 1px solid #333; margin-top: 20px; margin-left: 20px; text-align: center;}
+img {margin-top: 40px} 
+#div2{margin-top: 20px; margin-left: 20px;}
+label{margin-left: 100px}
+</style>
+<script type="text/javascript">
+
+function loadDice() {
+	obj=document.frm;
+	
+	x = parseInt(Math.random()*6)+1;
+	y = parseInt(Math.random()*6)+1;
+	obj.dice1.src="images/dice_"+x+".png";
+	obj.dice2.src="images/dice_"+y+".png";
+}
+
+function rollDice() {
+	loadDice();
+	
+	var output = x+y;
+	
+	obj.output.value=output;
+	
+}
+
+</script>
+</head>
+<body onload="loadDice()">
+<form name="frm">
+<input type="button" value="던지기" name="btn" class="btn" onclick="rollDice()"  style="margin-top: 20px; margin-left: 40px"/>
+<div id="div">
+<img name="dice1" src="" />
+<img name="dice2" src=""/>
+</div>
+<div id="div2">
+<label>결과</label> <input type="text" name="output" class="inputbox" >
+</div>
+</form>
+</body>
+</html>
