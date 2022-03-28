@@ -6,10 +6,10 @@
 <!-- 공통 CSS -->
 <link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
 <style type="text/css">
+form{margin: 0px auto}
 div{border: 3px solid #333; width: 400px; height: 300px; overflow: auto; margin-top: 20px}
-label{width: 100px; }
-input{ margin-top: 10px;}
-.btn{margin-left: 100px}
+input{margin-top: 10px;}
+.btn{margin-left: 80px}
 </style>
 <script type="text/javascript">
 
@@ -50,17 +50,20 @@ function validation() {
 		return;
 	}
 	
+	//0328 checkSum 배열로 변경 수정
 	var total=0;
-	for(var i=0; i<birth.length; i++) {
-		var n1 = birth.charAt(i)*(i+2);
-		total+=n1;
-	} 
+	var checkSum=[2,3,4,5,6,7,8,9,2,3,4,5];
 	
-	for(var i=0; i<securityNum.length-1; i++) {
-		n1=0;
-		i<2? n1=securityNum.charAt(i)*(i+8):n1 = securityNum.charAt(i)*i;
-		total += n1;
+	for(i=0; i<birth.length; i++){
+		var n1 = birth.charAt(i)*checkSum[i];
+		total+=n1;
 	}
+	
+	for(i=0; i<securityNum.length-1; i++){
+		n1=0;
+		n1 = securityNum.charAt(i)*checkSum[i+6];
+		total += n1;
+	} 
 	
 	securityNum.charAt(6)==11-(total%11)%10? val="유효":val="무효";
 	
@@ -108,23 +111,16 @@ function result(){
  				  nation ="외국인"; break; 
  	}
  	
+ 	//0328 배열로 변경 수정
  	var ddi="";
- 	switch(parseInt(fullYear)%12) {
-        case 0 : ddi ="원숭이띠"; break;
-        case 1 : ddi ="닭띠"; break;
-        case 2 : ddi ="개띠"; break;
-        case 3 : ddi ="돼지띠"; break;
-        case 4 : ddi ="쥐띠"; break;
-        case 5 : ddi ="소띠"; break;
-        case 6 : ddi ="호랑이띠"; break;
-        case 7 : ddi ="토끼띠"; break;
-        case 8 : ddi ="용띠"; break;
-        case 9 : ddi ="뱀띠"; break;
-        case 10 : ddi ="말띠"; break;
-        default : ddi ="양띠";
-        }
-
-
+ 	var cnt=parseInt(fullYear)%12;
+ 	var arrDdi=["원숭이띠","닭띠","개띠","돼지띠","쥐띠","소띠","호랑이띠","토끼띠","용띠","뱀띠","말띠","양띠"];
+	for(var i=0; i<arrDdi.length; i++){
+	 	if(i==cnt){ //조건을 for문에 넣으면 반복될 때마다 조건문을 돌리므로 위로 올림
+ 			ddi = arrDdi[i];
+	 	}
+	}	
+	
 	var date=birth.substring(2,4)+"월"+birth.substring(4,6)+"일";
 	
 	result = "태어난 해 : "+fullYear+"<br/>생년월일 : "+date+"<br/>성별 : "+gender+"<br/>띠 : "+ddi+"<br/>국적 : "+nation;
@@ -135,9 +131,9 @@ function result(){
 </head>
 <body >
 <form name="frm">
-<label>이름</label><input type="text" name="name" class="inputBox"/><br/>
+<label>이름</label><input type="text" name="name" class="inputBox" style="margin-left: 50px"/><br/>
 <label>주민번호</label>
-<input type="text" name="birth" class="inputBox" /> 
+<input type="text" name="birth" class="inputBox" style="margin-left: 20px"/> 
 	- <input type="password" name="securityNum" class="inputBox"/><br/>
 <input type="button" name="btn" value="입력" class="btn" onclick="print()" />
 </form>
