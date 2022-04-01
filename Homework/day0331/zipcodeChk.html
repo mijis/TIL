@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.149/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+th{background-color: #4F81BD; color: #ffffff;  width: 200px; height: 30px}
+td{width: 200px; height: 30px; margin: 2px}
+
+table{margin: 0px auto;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$(".tr").css("cursor", "pointer").click(sendZip);
+})
+ 
+function sendZip(){
+	opener.$("#zipcode").val($(this).find("td:even").text());
+	opener.$("#address").val($(this).find("td:odd").text());
+	self.close();
+}
+
+</script>
+</head>
+<body>
+<form>
+<table>
+<tr>
+	<th>우편번호</th>
+	<th>주소</th>
+</tr>
+<tr class="tr">
+	<td class="td1">111-111</td>
+	<td class="td2"><a>서울시 강남구 역삼동</a></td>
+</tr>
+<tr>
+	<td class="td1"><a>111-112</a></td>
+	<td class="td2"><a>서울시 동대문구 동대문동</a></td>
+</tr>
+<tr>
+	<td class="td1"><a>111-223</a></td>
+	<td class="td2"><a>부천시 워미구 소사동</a></td>
+</tr>
+</table>
+</form>
+</body>
+</html>
