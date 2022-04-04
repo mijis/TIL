@@ -19,15 +19,19 @@ $(function(){
 
 function idCheck(){
 	if($("#id").val()==""){
+		$("#output1").show();
 		$("#output1").html("아이디 필수 입력");
 		$("#id").focus();
-	}
+		return; 
 }
 
 function passCheck(){
 	if($("#passwd").val()==""){
+		$("#output2").show();
 		$("#output2").html("비밀번호 필수 입력");
 		$("#passwd").focus();
+		return; 
+	}
 	}
 }
 
