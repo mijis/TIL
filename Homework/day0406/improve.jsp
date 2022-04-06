@@ -35,6 +35,7 @@ String[] names={"정인선","권용현","강현모","신유철","서희수"};
 
 <table>
 	<tr>
+		<!-- JSP가 익숙하지 못해서 깔끔한 코드가 나오지 못했다. 항상 변수를 올리는 걸 잊지말자 -->
 		<% 
 		String img="";
 		for(int i=0; i<names.length; i++) {
